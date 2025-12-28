@@ -1,0 +1,886 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+:root{
+    --text: #000000;
+    --muted: #333333;
+    --accent: #6fdcff; /* light blue */
+    --overlay: rgba(255,255,255,0.9);
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body{
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    background-image: url("background-image.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+    
+    color: var(--text);
+}
+
+nav{
+    width: 100%;
+    height: 10vh;
+    position: sticky;
+}
+
+
+.nav-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo{
+    color: var(--text);
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.logo span{
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(111,220,255,0.25);
+}
+
+.hamburg, .cancel{
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: var(--text);
+    font-size: 2rem;
+    display: none;
+}
+
+.nav-container .links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-container .links a{
+    position: relative;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-container .links a::before{
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: var(--accent);
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-container .links a:hover::before{
+    width: 100%;
+}
+
+.nav-container .contact-btn{
+    background-color: transparent;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-container .contact-btn a{
+    color: var(--text);
+    transition: 0.3s linear;
+}
+
+.nav-container .contact-btn:hover, .nav-container .contact-btn:hover a{
+    background-color: var(--accent);
+    color: #111;
+}
+
+.nav-container .links a:hover{
+    color: var(--accent);
+}
+
+.dropdown{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    transform: translateY(-500px);
+    width: 100%;
+    height: auto;
+    backdrop-filter: brightness(30%) blur(3px);
+    box-shadow: 0 0 20px black;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dropdown .links a{
+    color: var(--text);
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    padding: 15px 0;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Make specific nav/dropdown links light-white by default and yellow on hover */
+nav .nav-container .links a[href="#home"],
+nav .nav-container .links a[href="#about"],
+nav .nav-container .links a[href="#skills"],
+nav .nav-container .links a[href="#projects"],
+nav .nav-container .links a[href="#contact"]{
+    color: rgba(255,255,255,0.92);
+    transition: color 0.2s linear;
+}
+
+nav .nav-container .links a[href="#home"]:hover,
+nav .nav-container .links a[href="#about"]:hover,
+nav .nav-container .links a[href="#skills"]:hover,
+nav .nav-container .links a[href="#projects"]:hover,
+nav .nav-container .links a[href="#contact"]:hover{
+    color: var(--accent);
+}
+
+.dropdown .links a[href="#home"],
+.dropdown .links a[href="#about"],
+.dropdown .links a[href="#skills"],
+.dropdown .links a[href="#projects"],
+.dropdown .links a[href="#contact"]{
+    color: rgba(255,255,255,0.92);
+}
+
+.dropdown .links a[href="#home"]:hover,
+.dropdown .links a[href="#about"]:hover,
+.dropdown .links a[href="#skills"]:hover,
+.dropdown .links a[href="#projects"]:hover,
+.dropdown .links a[href="#contact"]:hover{
+    color: var(--accent);
+}
+
+/* Section headings (home, about, skills, projects, contact) default light-white and turn yellow on hover */
+.home-page .content h1,
+.home-extended-container h2,
+.section-container h2{
+    color: #ffffff; /* make hero and section titles pure white */
+    transition: color 0.2s linear;
+}
+
+/* Ensure the actual home hero selector is targeted (section id="home")
+   so the "Hey I'm" text becomes white. Keep the span accent color intact. */
+#home .content h1{
+    color: #ffffff !important;
+}
+
+.home-page .content h1:hover,
+.home-extended-container h2:hover,
+.section-container h2:hover{
+    color: var(--accent);
+}
+
+/* Ensure Contact doesn't turn yellow on hover
+   - keep the contact button's background hover behavior (background -> var(--accent), text -> #111)
+   - ensure any plain 'Contact' link (e.g., in the dropdown) stays light-white on hover */
+.nav-container .contact-btn:hover a {
+    /* re-assert dark text on contact button hover */
+    color: #111;
+}
+
+.dropdown .links a[href="#contact"]:hover {
+
+    color: rgba(255,255,255,0.92);
+}
+
+.dropdown .links a:hover{
+    background-color: rgba(111,220,255,0.08);
+}
+
+section{
+    width: 100%;
+    height: 90vh;
+}
+
+/* ==========================
+   Standalone circular (SVG stroke) skills
+   ========================== */
+#skills, #soft-skills{
+    width: 100%;
+}
+#skills .section-container, #soft-skills .section-container{
+    width: 70%; /* match contact section width */
+    max-width: 1400px; /* match contact section max-width */
+    min-width: 560px;
+    margin: 0 auto;
+    padding: 22px;
+}
+
+/* make the outer section-container transparent for skills so only .skills-main shows the single translucent box */
+#skills .section-container{
+    background: transparent;
+    padding: 12px;
+}
+
+@media (max-width: 1000px) {
+    #skills .section-container {
+        width: 100%;
+        min-width: 0;
+        padding: 16px;
+    }
+}
+/* Maintain grid for Professional Skills */
+.skill-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 28px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* Vertical list for Technical Skills */
+.skills-list-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Basic skill item styles */
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Circular skill items (for Professional Skills) */
+.skill-item:not(.horizontal) {
+    position: relative;
+}
+.skill-svg {
+    width: 120px;
+    height: 120px;
+}
+.skill-bg {
+    stroke: rgba(255,255,255,0.08);
+}
+.skill-progress {
+    stroke: var(--accent);
+    stroke-dasharray: 327.0; /* will be recalculated in JS */
+    stroke-dashoffset: 327.0;
+}
+
+/* Horizontal skill items (for Technical Skills) */
+.skill-item.horizontal {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.skill-item.horizontal .skill-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 100%;
+}
+.skill-item.horizontal .skill-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.skill-item.horizontal .skill-progress {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Shared meta styles */
+.skill-name { 
+    color: rgb(247, 223, 223); 
+    font-size: 0.95rem;
+}
+.skill-num { 
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.skill-center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    background: transparent; /* removed small circle background */
+    border: none; /* removed outline */
+    box-shadow: none; /* removed glow */
+    width: auto;
+    height: auto;
+    padding: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.skill-center .skill-num{ color: var(--accent); font-size: 1.05rem; font-weight: 700; }
+.skill-item:hover .skill-center{ transform: translate(-50%, -52%) scale(1.02); }
+
+/* Horizontal 2x2 -> stacks on small screens */
+@media (max-width: 884px){
+    .skill-grid-2{ grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 18px; }
+    .skill-svg{ width: 100px; height: 100px; }
+}
+@media (max-width: 480px){
+    .skill-grid-2{ grid-template-columns: repeat(2, minmax(84px, 1fr)); gap: 12px; }
+    .skill-svg{ width: 84px; height: 84px; }
+}
+
+/* Skills main box: two columns inside a transparent container */
+.skills-main{
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+    justify-content: center;
+    background: rgba(0,0,0,0.18);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.skills-main .skills-column{
+    flex: 1 1 420px;
+}
+.skills-main h3{ color: var(--accent); text-align: center; margin-bottom: 12px; }
+
+@media (max-width:884px){
+    .skills-main{ flex-direction: column; }
+}
+
+.home-extended-container{
+    max-width: 900px;
+    text-align: center;
+    /* lighter panel so the image is more visible */
+    background: rgba(0,0,0,0.20);
+    padding: 18px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+.home-extended-container h2{
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--accent);
+}
+.home-extended-container p{
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+/* Shared section styles for About/Skills/Services/Blogs/Contact */
+.section{
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transparent so background image remains visible */
+    background: transparent;
+    padding: 40px 20px;
+}
+.section-container{
+    max-width: 1000px;
+    text-align: center;
+    /* lighter translucent container so the background image shows through */
+    background: rgba(0,0,0,0.18);
+    padding: 18px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+.section h2{
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+.section p{
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.skills-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+.skill{
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Smooth scrolling for anchor navigation */
+html{
+    scroll-behavior: smooth;
+}
+
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-container .image{
+    z-index: 0;
+    width: 50%;
+}
+
+.main-container .image img{
+    width: 100%;
+}
+
+/* Portrait-specific styling for homepage hero */
+.main-container .image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-container .image img.hero-portrait{
+    width: 320px;
+    max-width: 40vw;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45), 0 0 30px rgba(111,220,255,0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.main-container .image img.hero-portrait:hover{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55), 0 0 40px rgba(111,220,255,0.12);
+}
+
+@media (max-width: 884px){
+    .main-container .image img.hero-portrait{
+        width: 220px;
+        height: 220px;
+        max-width: 60vw;
+        margin: 12px 0;
+    }
+}
+
+.main-container .content{
+    color: var(--text);
+    width: 40%;
+    min-height: 100px;
+}
+
+.content h1{
+    font-size: clamp(1rem, 2rem + 5vw, 3rem);
+}
+
+.content h1 span{
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(111,220,255,0.25);
+}
+
+.content .typewriter{
+    font-weight: 600;
+    font-size: clamp(1rem, 1rem + 5vw, 2rem);
+}
+
+/* Make the static part of the typewriter text ("I'm a") white while
+   keeping the animated span accent-colored */
+.content .typewriter{
+    color: #ffffff !important;
+}
+
+.content .typewriter span{
+    color: var(--accent);
+    font-size: 2.5rem;
+    text-shadow: 0 0 5px rgba(111,220,255,0.25);
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.typewriter span::before{
+    content: "AI and ML Engineer";
+    animation: words 15s infinite;
+}
+
+.typewriter span::after{
+    content: "";
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 3px solid var(--text);
+    animation:  cursor 0.6s linear infinite;
+}
+
+@keyframes cursor {
+    to{
+        border-left: 3px solid var(--text);
+    }
+}
+
+@keyframes words {
+    0%, 49%{
+        content: "AI and ML Engineer";
+    }
+    50%, 100%{
+        content: "Embedded engineer";
+    }
+}
+
+.content p{
+    font-size: clamp(0.4rem, 0.2rem + 9vw, 1rem);
+    margin: 10px 0;
+    color: rgb(145, 135, 135);
+}
+
+.social-links i{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color:transparent;
+    border: 0.2rem solid var(--accent);
+    border-radius: 50%;
+    color:var(--accent);
+    margin: 5px 10px;
+    font-size: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.social-links i:hover{
+    transform: scale(1.3);
+    color: #111;
+    background-color: var(--accent);
+    filter: drop-shadow(0 0 10px rgba(111,220,255,0.35));
+}
+
+.content button{
+    width: 40%;
+    height: 6vh;
+    margin: 30px;
+    background-color: var(--accent);
+    color: #111;
+    border: none;
+    outline: none;
+    font-size: 100%;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.content button:hover{
+    transform: scale(1.05);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    background-color: transparent;
+    font-weight: 700;
+    box-shadow: 0 0 40px rgba(245,166,35,0.12);
+}
+
+/* style the download link to match the button look */
+.download-cv{
+    display: inline-block;
+    width: 40%;
+    height: 6vh;
+    line-height: 6vh;
+    margin: 30px 0;
+    background-color: var(--accent);
+    color: #111;
+    text-align: center;
+    text-decoration: none;
+    font-size: 100%;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.download-cv:hover{
+    transform: scale(1.05);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    background-color: transparent;
+    font-weight: 700;
+    box-shadow: 0 0 40px rgba(111,220,255,0.12);
+}
+
+/* ==========================
+   ABOUT SECTION
+   Styles for #about
+   ========================== */
+#about{
+    width: 100%;
+    min-height: 70vh;
+}
+#about .section-container{
+    max-width: 1200px;
+    background: rgba(0,0,0,0.18);
+    padding: 24px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+#about .about-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+#about .about-text{
+    flex: 1;
+    text-align: left;
+}
+#about .about-text h2{
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+}
+#about .about-text p{
+    color: rgb(247, 223, 223);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+#about .about-image{
+    flex: 1;
+    max-width: 400px;
+    padding: 20px;
+}
+#about .about-image img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(111,220,255,0.15);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#about .about-image img:hover{
+    transform: scale(1.02);
+}
+
+@media (max-width: 884px) {
+    #about .about-content{
+        flex-direction: column;
+    }
+    #about .about-image{
+        order: -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    #about .about-text{
+        text-align: center;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+
+#projects {
+    width: 100%;
+    min-height: 70vh;
+}
+#projects .section-container {
+    max-width: 1200px;
+    background: rgba(0,0,0,0.18);
+    padding: 24px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    margin: 0 auto;
+    text-align: center;
+}
+@media (max-width: 884px) {
+    #projects .section-container {
+        width: 100%;
+        padding: 20px 16px;
+    }
+}
+
+
+/* ==========================
+   CONTACT SECTION
+   Styles for #contact
+   ========================== */
+#contact{
+    width: 100%;
+}
+#contact .section-container{
+    width: 70%; /* make contact area 70% of viewport width */
+    max-width: 1400px; /* keep an upper cap for very large screens */
+    min-width: 560px; /* prevent too-narrow layout on medium screens */
+    margin: 0 auto; /* center horizontally */
+    text-align: center;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+/* Contact form styles */
+#contact .contact-form{
+    max-width: 900px; /* allow more horizontal space for the form */
+    margin: 18px auto 0;
+    text-align: left;
+}
+#contact .contact-form .form-row{ margin-bottom: 12px; }
+#contact .contact-form label{ display: block; margin-bottom: 6px; color: var(--accent); font-weight: 600; }
+#contact .contact-form input,
+#contact .contact-form textarea{
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+    color: var(--accent);
+    font-size: 0.95rem;
+}
+#contact .contact-form input::placeholder,
+#contact .contact-form textarea::placeholder{ color: rgba(111,220,255,0.45); }
+#contact .contact-form input:focus,
+#contact .contact-form textarea:focus{
+    outline: none;
+    box-shadow: 0 0 0 6px rgba(111,220,255,0.04);
+    border-color: var(--accent);
+}
+#contact .contact-form .form-actions{ display:flex; align-items:center; gap:12px; margin-top:8px; }
+#contact .contact-form .btn-submit{
+    background: var(--accent);
+    color: #111;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+#contact .contact-form .btn-submit:hover{
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+#contact #contact-feedback{ color: var(--accent); font-weight: 600; }
+
+
+@media (max-width:884px) {
+    body{
+        overflow-y: visible;
+        /* On small screens, avoid fixed background (performance/visual) and let it cover */
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    nav .logo{
+        position: absolute;
+        top: 16px;
+        left: 15px;
+        font-size: 1.5rem;
+    }
+
+    .main-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-container .links{
+        display: none;
+    }
+
+    .hamburg,.cancel{
+        display: block;
+    }
+
+    .main-container .content{
+        width: 80%;
+    }
+
+    .social-links i{
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+    .cancel{
+        color: white;
+    }
+
+    .main-container .image{
+        width: 80%;
+        margin-bottom: 0px;
+    }
+}
+
+/* Ensure contact container uses full width on small screens */
+@media (max-width: 1000px) {
+    #contact .section-container{ width: 100%; min-width: 0; padding-left: 16px; padding-right: 16px; }
+}
+
+/* Strong override: keep Contact text white always (desktop & dropdown)
+   Use specific selectors and !important to ensure this isn't overridden by other hover rules. */
+.nav-container .links a[href="#contact"],
+.nav-container .links a[href="#contact"]:hover,
+.nav-container .links .contact-btn a,
+.nav-container .links .contact-btn a:hover,
+.nav-container .links .contact-btn:hover a {
+    color: rgba(255,255,255,0.95) !important;
+}
+
+.dropdown .links a[href="#contact"],
+.dropdown .links a[href="#contact"]:hover{
+    color: rgba(255,255,255,0.95) !important;
+}
+
+/* Scroll to top button */
+#scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent);
+    color: #111;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1000;
+    opacity: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#scroll-to-top.visible {
+    display: flex;
+    opacity: 1;
+}
+
+#scroll-to-top:hover {
+    transform: translateY(-3px);
+    background-color: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 15px rgba(111,220,255,0.3);
+}
